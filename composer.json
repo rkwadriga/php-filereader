@@ -2,7 +2,7 @@
   "name": "rkwadriga/php-filereader",
   "type": "library",
   "description": "PHP file reader",
-  "version": "1.1.0-dev",
+  "version": "1.1.0",
   "homepage": "https://github.com/rkwadriga/php-filereader",
   "license": "MIT",
   "minimum-stability": "dev",
