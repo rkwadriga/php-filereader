@@ -26,9 +26,15 @@ class Factory
         self::EXT_YAML => 'rkwadriga\filereader\YamlReader',
     ];
 
-    public function __construct(?string $filePath = null)
+    public function __construct(?string $filePath = null, array $extensionsMap = [])
     {
         $this->filePath = $filePath !== null ? str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $filePath) : null;
+        $this->setExtensionsMap($extensionsMap);
+    }
+
+    public function getAllowedExtensions() : array
+    {
+        return array_keys($this->classesMap);
     }
 
     public function getReader(string $forFile, bool $autoCreate = true) : AbstractReader
@@ -38,6 +44,15 @@ class Factory
             $this->readers[$forFile] = $this->createFileReader($file);
         }
         return $this->readers[$forFile];
+    }
+
+    private function setExtensionsMap(array $extensionsMap) : void
+    {
+        foreach ($extensionsMap as $fromExt => $toExt) {
+            if (isset($this->classesMap[$toExt])) {
+                $this->classesMap[$fromExt] = $this->classesMap[$toExt];
+            }
+        }
     }
 
     private function createFileReader(string $forFile) : AbstractReader

@@ -56,3 +56,12 @@ The file readers automatically crete file if it's not exist. If you don't want t
 $fileReader = $this->factory->getReader('main.yml', false);
 ```
 In this case you will get the "File not found" exception trying to read not existed file.
+
+If you have some specific file extension but that can be read like one of allowed extensions, you can set the "extensions map" of the readers factory:
+```php
+$this->factory = new Factory(null, [
+    'xjson' => 'json',
+    'xtxt' => 'txt',
+    ...
+]);
+```

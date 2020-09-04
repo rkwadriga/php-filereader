@@ -19,7 +19,7 @@ class JsonReader extends AbstractReader
         }
         $this->file->data = json_decode($data, true);
         if ($this->file->data === null) {
-            throw new FRException(sprintf('Invalid json in file %s', $this->file->path), FRException::CODE_VALIDATION_ERROR);
+            throw new FRException(sprintf('Invalid json in file %s: (%s) "%s"', $this->file->path, json_last_error(), json_last_error_msg()), FRException::CODE_VALIDATION_ERROR);
         }
         return $this->file->data;
     }
@@ -28,5 +28,4 @@ class JsonReader extends AbstractReader
     {
         return json_encode($data);
     }
-
 }
