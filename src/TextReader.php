@@ -17,14 +17,28 @@ class TextReader extends AbstractReader
             throw new FRException(sprintf('Can not read the file %s: %s', $this->file->path, $e->getMessage()), FRException::CODE_READING_ERROR, $e);
         }
 
+        $sep = $this->convertSep();
         $this->file->data = [];
-        $strings = explode($this->sep, $data);
+        $strings = explode($sep, $data);
         return $this->file->data = array_filter($strings);
     }
 
     public function convertData(array $data) : string
     {
-        $delimiter = $this->sep === "\n" ? $this->sep : $this->sep . "\n";
-        return implode($delimiter, $data);
+        $sep = $this->convertSep();
+        $result = '';
+        foreach ($data as $string) {
+            if (is_array($string)) {
+                $result .= $this->convertData($string) . $sep;
+            } else {
+                $result .= $string . $sep;
+            }
+        }
+        return substr($result, 0, -strlen($sep));
+    }
+
+    private function convertSep() : string
+    {
+        return $this->sep === "\n" ? $this->sep : $this->sep . "\n";
     }
 }

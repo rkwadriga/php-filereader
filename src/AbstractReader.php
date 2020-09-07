@@ -21,6 +21,7 @@ abstract class AbstractReader
     public function writeData(array $data) : void
     {
         try {
+            $this->file->data = $data;
             file_put_contents($this->file->path, $this->convertData($data));
         } catch (\Exception $e) {
             throw new FRException(sprintf('Can not write the file %s: %s', $this->file->path, $e->getMessage()), FRException::CODE_WRITING_ERROR, $e);

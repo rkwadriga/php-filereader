@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace tests;
+namespace rkwadriga\filereader\tests;
 
-use PHPUnit\Framework\TestCase;
 use rkwadriga\filereader\AbstractReader;
 use rkwadriga\filereader\Factory;
 use rkwadriga\filereader\FRException;
@@ -14,11 +13,9 @@ use rkwadriga\filereader\TxtReader;
 use rkwadriga\filereader\YamlReader;
 use rkwadriga\filereader\YmlReader;
 
-class FactoryTest extends TestCase
+class FactoryTest extends ReaderTestAbstract
 {
     // Run test: vendor/bin/phpunit tests/FactoryTest
-
-    private string $filesDir = __DIR__ . DIRECTORY_SEPARATOR . 'files';
 
     public function testReadersClasses() : void
     {
@@ -69,18 +66,8 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf(CsvReader::class, $factory->getReader($this->getFile('xcsv'), false));
     }
 
-    private function getReaderForFile(string $file, bool $autoCreate = true) : AbstractReader
+    protected function getReaderForFile(string $file, bool $autoCreate = true) : AbstractReader
     {
-        return (new Factory($this->filesDir))->getReader($file, $autoCreate);
-    }
-
-    private function getReaderForExt(string $ext, bool $autoCreate = true) : AbstractReader
-    {
-        return (new Factory($this->filesDir))->getReader($this->getFile($ext), $autoCreate);
-    }
-
-    private function getFile(string $ext) : string
-    {
-        return 'test.' . $ext;
+        return $this->getFactory(false)->getReader($file, $autoCreate);
     }
 }

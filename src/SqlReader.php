@@ -4,5 +4,5 @@ namespace rkwadriga\filereader;
 
 class SqlReader extends TextReader
 {
-    protected string $sep = "\n";
+    protected string $sep = ";";
 }

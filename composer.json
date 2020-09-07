@@ -14,11 +14,13 @@
     }
   ],
   "require": {
-    "php": ">=7.4.0"
+    "php": ">=7.4.0",
+    "phpunit/phpunit": "^5.7"
   },
   "autoload": {
     "psr-4": {
-      "rkwadriga\\filereader\\": "src"
+      "rkwadriga\\filereader\\": "src",
+      "rkwadriga\\filereader\\tests\\": "tests"
     }
   }
 }
