@@ -58,7 +58,11 @@ class YmlReader extends AbstractReader
 
     public function convertData(array $data): string
     {
-        return '';
+        $convertedData = $this->convertDataRecursive($data);
+        if (substr($convertedData, -1) === "\n") {
+            $convertedData = substr($convertedData, 0, -1);
+        }
+        return $convertedData;
     }
 
     private function getSpacesCount(string $string): int
@@ -76,6 +80,13 @@ class YmlReader extends AbstractReader
     private function addValueRecursive(array &$array, array $names, string $name, string $value) : array
     {
         if (empty($names)) {
+            if ($value === 'true') {
+                $value = true;
+            } elseif ($value === 'false') {
+                $value = false;
+            } elseif ($value === 'null') {
+                $value = null;
+            }
             return array_merge($array, [$name => $value]);
         }
         $firstName = array_shift($names);
@@ -85,5 +96,40 @@ class YmlReader extends AbstractReader
         $array[$firstName] = $this->addValueRecursive($array[$firstName], $names, $name, $value);
 
         return $array;
+    }
+
+    private function convertDataRecursive(array $data, ?string $name = null, ?string $value = null, int $level = -1) : string
+    {
+        $converted = '';
+        if ($name !== null) {
+            $converted .= str_repeat(' ', $level * 2) . $name . ':';
+        }
+        if ($value !== null) {
+            $converted .= " {$value}";
+        }
+
+        if ($level >= 0) {
+            $converted .= "\n";
+        }
+
+        foreach ($data as $dataName => $dataValue) {
+            if (is_array($dataValue)) {
+                $newLevelData = $dataValue;
+                $newLevelValue = null;
+            } else {
+                if ($dataValue === true) {
+                    $dataValue = 'true';
+                } elseif ($dataValue === false) {
+                    $dataValue = 'false';
+                } elseif ($dataValue === null) {
+                    $dataValue = 'null';
+                }
+                $newLevelData = [];
+                $newLevelValue = $dataValue;
+            }
+            $converted .= $this->convertDataRecursive($newLevelData, $dataName, $newLevelValue, $level + 1);
+        }
+
+        return $converted;
     }
 }
