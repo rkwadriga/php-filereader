@@ -12,7 +12,7 @@ class CsvReaderTest extends ReaderTestAbstract
 
     public function testReading() : void
     {
-        // Read file
+        // Read file and check the reading result
         $this->assertEquals($this->testData, $this->getReaderForFile('test_read.' . Factory::EXT_CSV)->readFile());
     }
 

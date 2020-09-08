@@ -58,7 +58,6 @@ class YmlReader extends AbstractReader
 
     public function convertData(array $data): string
     {
-        // TODO: Implement convertData() method.
         return '';
     }
 
