@@ -35,7 +35,7 @@ class FactoryTest extends ReaderTestAbstract
         // Check not existed file
         $this->expectException(FRException::class);
         $this->expectExceptionCode(FRException::CODE_FILE_NOT_FOUND);
-        $reader->readFile();
+        $reader->read();
     }
 
     public function testNotAllowedExtension() : void

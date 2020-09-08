@@ -12,7 +12,7 @@ class YamlReaderTest extends YmlReaderTest
     public function testReading() : void
     {
         // Read file and check the reading result
-        $this->assertEquals($this->testData, $this->getReaderForFile('test_read.' . Factory::EXT_YAML)->readFile());
+        $this->assertEquals($this->testData, $this->getReaderForFile('test_read.' . Factory::EXT_YAML)->read());
     }
 
     public function testWriting() : void
@@ -22,7 +22,7 @@ class YamlReaderTest extends YmlReaderTest
         // Clear test file
         file_put_contents($writer->getFile()->path, '');
         // Write data and check how it's wrote
-        $writer->writeData($this->testData);
+        $writer->write($this->testData);
         $this->assertEquals($this->testFileContent, $writer->getFile()->raw());
     }
 
@@ -32,6 +32,6 @@ class YamlReaderTest extends YmlReaderTest
         $reader = $this->getReaderForFile('invalid_test_read.' . Factory::EXT_YAML);
         $this->expectException(FRException::class);
         $this->expectExceptionCode(FRException::CODE_VALIDATION_ERROR);
-        $reader->readFile();
+        $reader->read();
     }
 }

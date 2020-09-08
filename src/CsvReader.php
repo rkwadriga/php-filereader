@@ -9,7 +9,7 @@ class CsvReader extends AbstractReader
 
     protected string $sep = self::SEP_POINT_AND_COMMA;
 
-    public function readFile(?array $requiredAttributes = []) : array
+    public function read(?array $requiredAttributes = []) : array
     {
         if ($this->file->data !== null) {
             return $this->file->data;

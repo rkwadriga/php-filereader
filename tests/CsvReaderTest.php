@@ -14,7 +14,7 @@ class CsvReaderTest extends ReaderTestAbstract
     public function testReading() : void
     {
         // Read file and check the reading result
-        $this->assertEquals($this->testData, $this->getReaderForFile('test_read.' . Factory::EXT_CSV)->readFile());
+        $this->assertEquals($this->testData, $this->getReaderForFile('test_read.' . Factory::EXT_CSV)->read());
     }
 
     public function testWriting() : void
@@ -24,7 +24,7 @@ class CsvReaderTest extends ReaderTestAbstract
         // Clear test file
         file_put_contents($writer->getFile()->path, '');
         // Write data and check how it's wrote
-        $writer->writeData($this->testData);
+        $writer->write($this->testData);
         $this->assertEquals($this->testFileContent, $writer->getFile()->raw());
     }
 
@@ -34,6 +34,6 @@ class CsvReaderTest extends ReaderTestAbstract
         $reader = $this->getReaderForFile('invalid_test_read.' . Factory::EXT_CSV);
         $this->expectException(FRException::class);
         $this->expectExceptionCode(FRException::CODE_VALIDATION_ERROR);
-        $reader->readFile();
+        $reader->read();
     }
 }

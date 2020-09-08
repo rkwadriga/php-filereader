@@ -20,7 +20,7 @@ class SqlReaderTest extends ReaderTestAbstract
             $testData = array_merge($testData, array_values($dataArr));
         }
         // Read file acn check reading result
-        $this->assertEquals($testData, $reader->readFile());
+        $this->assertEquals($testData, $reader->read());
     }
 
     public function testWriting() : void
@@ -30,7 +30,7 @@ class SqlReaderTest extends ReaderTestAbstract
         // Clear test file
         file_put_contents($writer->getFile()->path, '');
         // Write data and check how it's wrote
-        $writer->writeData($this->testData);
+        $writer->write($this->testData);
         $this->assertEquals($this->testFileContent, $writer->getFile()->raw());
     }
 }

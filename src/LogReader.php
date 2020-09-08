@@ -2,7 +2,7 @@
 
 namespace rkwadriga\filereader;
 
-class LogReader extends TextReader
+class LogReader extends TxtReader
 {
 
 }

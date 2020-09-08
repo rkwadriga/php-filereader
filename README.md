@@ -17,48 +17,38 @@ use rkwadriga\filereader\Factory;
 
 class MyApp
 {
-    public function __construct()
+    public function myFunction()
     {
-        // Create files reader (in this case .yml files reader)
-        $fileReader = (new Factory())->getReader('./config/main.yml');
-        ...
-        // Read file
-        $data = $fileReader->readFile();
-        ...
+        // Create a Factory instance
+        $factory = new Factory();
+        // Create file reader (in this case .yml file reader)
+        $fileReader = $factory->getReader('./config/main.yml');
+
+        // Read file (method "readFile" returns an associative array)
+        $data = $fileReader->read();
+
         // Write file
-        $fileReader->writeData([
+        $fileReader->write([
             'var1' => 'Value 1',
             'var2' => 'Value 2',
         ]);
-        ...
     }
 }
 ```
 If you use the same dir for all files you work with, you can put this dir in Factory constructor and use relative files paths:
 ```php
-use rkwadriga\filereader\Factory;
-
-class MyApp
-{
-    private Factory $factory;
-
-    public function __construct()
-    {
-        $this->factory = new Factory('./files_dir');
-        $fileReader = $this->factory->getReader('main.yml');
-        ...
-    }
-}
+$factory = new Factory('./files_dir_path');
+$fileReader = $factory->getReader('main.yml');
 ```
 The file readers automatically crete file if it's not exist. If you don't want to do this, set second argument of "getReader" method to false:
 ```php
-$fileReader = $this->factory->getReader('main.yml', false);
+$fileReader = $factory->getReader('main.yml', false);
 ```
 In this case you will get the "File not found" exception trying to read not existed file.
 
 If you have some specific file extension but that can be read like one of allowed extensions, you can set the "extensions map" of the readers factory:
 ```php
-$this->factory = new Factory(null, [
+$factory = new Factory(null, [
     'xjson' => 'json',
     'xtxt' => 'txt',
     ...

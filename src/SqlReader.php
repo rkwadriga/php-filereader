@@ -2,7 +2,7 @@
 
 namespace rkwadriga\filereader;
 
-class SqlReader extends TextReader
+class SqlReader extends TxtReader
 {
     protected string $sep = ";";
 }

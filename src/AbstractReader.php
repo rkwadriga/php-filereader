@@ -18,7 +18,7 @@ abstract class AbstractReader
         return $this->file;
     }
 
-    public function writeData(array $data) : void
+    public function write(array $data) : void
     {
         try {
             $this->file->data = $data;
@@ -34,7 +34,7 @@ abstract class AbstractReader
         return $this;
     }
 
-    abstract public function readFile(?array $requiredAttributes = []) : array;
+    abstract public function read(?array $requiredAttributes = []) : array;
 
     abstract public function convertData(array $data) : string;
 }

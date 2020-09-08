@@ -11,6 +11,7 @@ class Factory
     const EXT_CSV = 'csv';
     const EXT_SQL = 'sql';
     const EXT_TXT = 'txt';
+    const EXT_TEXT = 'text';
     const EXT_LOG = 'log';
     const EXT_JSON = 'json';
     const EXT_YML = 'yml';
@@ -20,6 +21,7 @@ class Factory
         self::EXT_CSV => 'rkwadriga\filereader\CsvReader',
         self::EXT_SQL => 'rkwadriga\filereader\SqlReader',
         self::EXT_TXT => 'rkwadriga\filereader\TxtReader',
+        self::EXT_TEXT => 'rkwadriga\filereader\TextReader',
         self::EXT_LOG => 'rkwadriga\filereader\LogReader',
         self::EXT_JSON => 'rkwadriga\filereader\JsonReader',
         self::EXT_YML => 'rkwadriga\filereader\YmlReader',

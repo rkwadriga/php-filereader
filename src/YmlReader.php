@@ -4,7 +4,7 @@ namespace rkwadriga\filereader;
 
 class YmlReader extends AbstractReader
 {
-    public function readFile(?array $requiredAttributes = []): array
+    public function read(?array $requiredAttributes = []): array
     {
         if ($this->file->data !== null) {
             return $this->file->data;
