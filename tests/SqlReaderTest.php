@@ -10,6 +10,12 @@ class SqlReaderTest extends ReaderTestAbstract
 
     protected string $testFileContent = "Test val 11;\nTest val 12;\nTest val 13;\nTest val 14;\nTest val 15;\nTest val 21;\nTest val 22;\nTest val 23;\nTest val 24;\nTest val 25;\nTest val 31;\nTest val 32;\nTest val 33;\nTest val 34;\nTest val 35";
 
+    public function testDataConverting() : void
+    {
+        $reader = $this->getReaderForNotExistedFile(Factory::EXT_SQL);
+        $this->assertEquals($this->testFileContent, $reader->convertData($this->testData));
+    }
+
     public function testReading() : void
     {
         // Get file reader

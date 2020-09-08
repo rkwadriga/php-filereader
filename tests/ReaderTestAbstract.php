@@ -58,6 +58,11 @@ abstract class ReaderTestAbstract extends TestCase
         return $this->getReaderForFile($this->getFile($ext), $autoCreate);
     }
 
+    protected function getReaderForNotExistedFile(string $ext, $autoCreate = false) : AbstractReader
+    {
+        return $this->getReaderForFile('not_existed_file.' . $ext, $autoCreate);
+    }
+
     protected function getFile(string $ext) : string
     {
         return 'test.' . $ext;

@@ -17,6 +17,8 @@ class FactoryTest extends ReaderTestAbstract
 {
     // Run test: vendor/bin/phpunit tests/FactoryTest
 
+    protected string $notExistedFile = 'not_existed_file.' . Factory::EXT_TXT;
+
     public function testReadersClasses() : void
     {
         $this->assertInstanceOf(CsvReader::class, $this->getReaderForExt(Factory::EXT_CSV));
@@ -30,8 +32,13 @@ class FactoryTest extends ReaderTestAbstract
 
     public function testNotAutoCreatingFiles() : void
     {
-        $reader = $this->getReaderForFile('not_existing_file.txt', false);
-
+        // Get file reader
+        $reader = $this->getReaderForFile($this->notExistedFile, false);
+        // Remove file if exist
+        $file = $reader->getFile()->path;
+        if (file_exists($file)) {
+            unlink($file);
+        }
         // Check not existed file
         $this->expectException(FRException::class);
         $this->expectExceptionCode(FRException::CODE_FILE_NOT_FOUND);
@@ -48,14 +55,16 @@ class FactoryTest extends ReaderTestAbstract
 
     public function testAutoCreatingFiles() : void
     {
-        // File not exists
-        $reader = $this->getReaderForFile('not_existing_file.txt', false);
-        $this->assertFileNotExists($reader->getFile()->path);
-        // File exist
-        $reader = $this->getReaderForFile('not_existing_file.txt', true);
-        $this->assertFileExists($reader->getFile()->path);
+        // Get reader for not existed file
+        $reader = $this->getReaderForFile($this->notExistedFile, false);
+        $file = $reader->getFile()->path;
+        // Check is file not exists
+        $this->assertFileNotExists($file);
+        // Check is file exists
+        $this->getReaderForFile($this->notExistedFile, true);
+        $this->assertFileExists($file);
         // Delete file
-        unlink($reader->getFile()->path);
+        unlink($file);
     }
 
     public function testExtensionsMapping() : void

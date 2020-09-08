@@ -11,6 +11,12 @@ class JsonReaderTest extends ReaderTestAbstract
 
     protected string $testFileContent = '[{"Test attr 1":"Test val 11","Test attr 2":"Test val 12","Test attr 3":"Test val 13","Test attr 4":"Test val 14","Test attr 5":"Test val 15"},{"Test attr 1":"Test val 21","Test attr 2":"Test val 22","Test attr 3":"Test val 23","Test attr 4":"Test val 24","Test attr 5":"Test val 25"},{"Test attr 1":"Test val 31","Test attr 2":"Test val 32","Test attr 3":"Test val 33","Test attr 4":"Test val 34","Test attr 5":"Test val 35"}]';
 
+    public function testDataConverting() : void
+    {
+        $reader = $this->getReaderForNotExistedFile(Factory::EXT_JSON);
+        $this->assertEquals($this->testFileContent, $reader->convertData($this->testData));
+    }
+
     public function testReading() : void
     {
         // Read file and check the reading result

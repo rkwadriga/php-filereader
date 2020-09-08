@@ -5,9 +5,24 @@ namespace rkwadriga\filereader\tests;
 use rkwadriga\filereader\Factory;
 use rkwadriga\filereader\FRException;
 
-class YamlReaderTest extends YmlReaderTest
+class YamlReaderTest extends ReaderTestAbstract
 {
     // Run test: vendor/bin/phpunit tests/YamlReaderTest
+
+    use YmlReaderTestTrait;
+
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->testData = $this->getTestData();
+        $this->testFileContent = $this->getTestFileContent();
+    }
+
+    public function testDataConverting() : void
+    {
+        $reader = $this->getReaderForNotExistedFile(Factory::EXT_YAML);
+        $this->assertEquals($this->testFileContent, $reader->convertData($this->testData));
+    }
 
     public function testReading() : void
     {
