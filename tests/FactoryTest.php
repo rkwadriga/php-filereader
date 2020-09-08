@@ -10,6 +10,7 @@ use rkwadriga\filereader\JsonReader;
 use rkwadriga\filereader\LogReader;
 use rkwadriga\filereader\SqlReader;
 use rkwadriga\filereader\TxtReader;
+use rkwadriga\filereader\TextReader;
 use rkwadriga\filereader\YamlReader;
 use rkwadriga\filereader\YmlReader;
 
@@ -24,6 +25,7 @@ class FactoryTest extends ReaderTestAbstract
         $this->assertInstanceOf(CsvReader::class, $this->getReaderForExt(Factory::EXT_CSV));
         $this->assertInstanceOf(SqlReader::class, $this->getReaderForExt(Factory::EXT_SQL));
         $this->assertInstanceOf(TxtReader::class, $this->getReaderForExt(Factory::EXT_TXT));
+        $this->assertInstanceOf(TextReader::class, $this->getReaderForExt(Factory::EXT_TEXT));
         $this->assertInstanceOf(LogReader::class, $this->getReaderForExt(Factory::EXT_LOG));
         $this->assertInstanceOf(JsonReader::class, $this->getReaderForExt(Factory::EXT_JSON));
         $this->assertInstanceOf(YmlReader::class, $this->getReaderForExt(Factory::EXT_YML));
