@@ -10,7 +10,6 @@ $ composer require rkwadriga/php-filereader:dev-master
 ```
 
 ### Supported formats: csv, sql, txt, log, json, yml, yaml
-* For now  for formats "yml" and "yaml" only in read mode available
 
 ## Usage
 ```php
