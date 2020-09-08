@@ -3,6 +3,7 @@
 namespace rkwadriga\filereader\tests;
 
 use rkwadriga\filereader\Factory;
+use rkwadriga\filereader\FRException;
 
 class YamlReaderTest extends YmlReaderTest
 {
@@ -23,5 +24,14 @@ class YamlReaderTest extends YmlReaderTest
         // Write data and check how it's wrote
         $writer->writeData($this->testData);
         $this->assertEquals($this->testFileContent, $writer->getFile()->raw());
+    }
+
+    public function testInvalidReading() : void
+    {
+        // Get invalid file reader
+        $reader = $this->getReaderForFile('invalid_test_read.' . Factory::EXT_YAML);
+        $this->expectException(FRException::class);
+        $this->expectExceptionCode(FRException::CODE_VALIDATION_ERROR);
+        $reader->readFile();
     }
 }
