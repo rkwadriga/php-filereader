@@ -61,7 +61,7 @@ class FactoryTest extends ReaderTestAbstract
         $reader = $this->getReaderForFile($this->notExistedFile, false);
         $file = $reader->getFile()->path;
         // Check is file not exists
-        $this->assertFileNotExists($file);
+        $this->assertFileDoesNotExist($file);
         // Check is file exists
         $this->getReaderForFile($this->notExistedFile, true);
         $this->assertFileExists($file);
