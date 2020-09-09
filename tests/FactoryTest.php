@@ -16,7 +16,7 @@ use rkwadriga\filereader\YmlReader;
 
 class FactoryTest extends ReaderTestAbstract
 {
-    // Run test: vendor/bin/phpunit tests/FactoryTest
+    // Run test: ./run tests/FactoryTest
 
     protected string $notExistedFile = 'not_existed_file.' . Factory::EXT_TXT;
 

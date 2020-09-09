@@ -7,7 +7,7 @@ use rkwadriga\filereader\FRException;
 
 class YmlReaderTest extends ReaderTestAbstract
 {
-    // Run test: vendor/bin/phpunit tests/YmlReaderTest
+    // Run test: ./run tests/YmlReaderTest
 
     use YmlReaderTestTrait;
 

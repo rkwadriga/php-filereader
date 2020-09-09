@@ -6,7 +6,7 @@ use rkwadriga\filereader\Factory;
 
 class ReaderTest extends ReaderTestAbstract
 {
-    // Run test: vendor/bin/phpunit tests/ReaderTest
+    // Run test: ./run tests/ReaderTest
 
     protected string $notExistedFile = 'not_existed_file.' . Factory::EXT_TXT;
 

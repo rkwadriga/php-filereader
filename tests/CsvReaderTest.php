@@ -7,7 +7,7 @@ use rkwadriga\filereader\FRException;
 
 class CsvReaderTest extends ReaderTestAbstract
 {
-    // Run test: vendor/bin/phpunit tests/CsvReaderTest
+    // Run test: ./run tests/CsvReaderTest
 
     protected string $invalidReadFile = 'invalid_test_read.' . Factory::EXT_CSV;
     protected string $invalidWriteFile = 'invalid_test_write.' . Factory::EXT_CSV;
